@@ -3,6 +3,7 @@ package com.poly.app.Impl;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,10 @@ import com.poly.app.repository.OrdersDetailRepository;
 import com.poly.app.service.OrdersDetailService;
 
 @Service
+@RequiredArgsConstructor
 public class OrdersDetailSeviceImpl implements OrdersDetailService {
 
-	@Autowired
-	OrdersDetailRepository dao;
+	private final  OrdersDetailRepository dao;
 	@Override
 	public OrdersDetail save(OrdersDetail orders) {
 		return dao.save(orders);

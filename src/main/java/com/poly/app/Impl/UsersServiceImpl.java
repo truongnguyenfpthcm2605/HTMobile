@@ -3,6 +3,7 @@ package com.poly.app.Impl;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +15,10 @@ import com.poly.app.repository.UsersRepository;
 import com.poly.app.service.UsersService;
 
 @Service
+@RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
-	@Autowired
-	UsersRepository dao;
-	
+
+	private final  UsersRepository dao;
 
 	@Override
 	public Users save(Users users) {
@@ -26,7 +27,6 @@ public class UsersServiceImpl implements UsersService {
 		}
 		return dao.save(users);
 	}
-
 	@Override
 	public Users update(Users users) {
 		return dao.save(users);

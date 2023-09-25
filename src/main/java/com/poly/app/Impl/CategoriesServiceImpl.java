@@ -3,6 +3,7 @@ package com.poly.app.Impl;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,10 @@ import com.poly.app.repository.CategoriesRepository;
 import com.poly.app.service.CategoriesSevice;
 
 @Service
+@RequiredArgsConstructor
 public class CategoriesServiceImpl implements CategoriesSevice {
-	
-	@Autowired
-	CategoriesRepository dao;
+
+	private final  CategoriesRepository dao;
 
 	@Override
 	public Categories save(Categories categories) {

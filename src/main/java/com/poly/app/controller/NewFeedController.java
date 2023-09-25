@@ -1,5 +1,6 @@
 package com.poly.app.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +11,14 @@ import com.poly.app.Impl.ShoppingCartServiceImpl;
 
 @Controller
 @RequestMapping("newfeed")
+@RequiredArgsConstructor
 public class NewFeedController {
-	
+	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
 	@GetMapping("views")
 	public String index() {
 		return "newfeed";
 	}
-	@Autowired
-	ShoppingCartServiceImpl shoppingCartServiceImpl;
+
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {

@@ -50,16 +50,12 @@ public class AES {
 		}
 		return null;
 	}
-	//public static void main(String[] args) {
-//		final String secretKey = "Mainkey";
+	public static void main(String[] args) {
+		final String secretKey = "Mainkey";
 
-	//	String mkhv = "hauvan123";
-	//	String mlvt = "truong123";
-	//	String encryptedString = AES.encrypt(mlvt, secretKey) ;
-	//	String decryptedString = AES.decrypt("yrb2veQ7S+Oe6nrLXPOqWQ==", secretKey) ;
+		String decryptedString = AES.decrypt("KxAawz8nPqnocuTKeqSZpw==", secretKey) ;
 
-		//System.out.println(mlvt);
-	//	System.out.println(encryptedString);
-	//	System.out.println(decryptedString);
-	//}
+
+		System.out.println(decryptedString);
+	}
 }

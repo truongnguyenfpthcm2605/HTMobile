@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,25 +34,14 @@ import jakarta.servlet.ServletContext;
 
 @Controller
 @RequestMapping("admin/bill")
+@RequiredArgsConstructor
 public class AminbillController {
-
-	@Autowired
-	OrdersServiceImpl ordersServiceImpl;
-
-	@Autowired
-	OrdersDetailSeviceImpl ordersDetailSeviceImpl;
-	
-	@Autowired
-	VoucherServiceImpl voucherServiceImpl;
-
-	@Autowired
-	SessionSevice sessionSevice;
-	
-	@Autowired
-	ServletContext app;
-	
-	@Autowired
-	MailerServiceImpl mailerServiceImpl;
+	private final OrdersServiceImpl ordersServiceImpl;
+	private final OrdersDetailSeviceImpl ordersDetailSeviceImpl;
+	private  final VoucherServiceImpl voucherServiceImpl;
+	private final SessionSevice sessionSevice;
+	private final ServletContext app;
+	private final MailerServiceImpl mailerServiceImpl;
 
 	@GetMapping("")
 	public String index(Model model) {

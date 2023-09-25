@@ -58,21 +58,16 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-lg-8 col-md-7">
-					<form action="/product/search" class="row" method="post">
-						<div class="col-md-9">
-							<input type="text" class="form-control"
-								placeholder="Bạn tìm sản phẩm nào ?" name="search"
-								value="${keywords }">
-						</div>
-						<div class="col-md-3">
-							<button class="btn btn-dark">
-								<i class='bx bx-search'></i>Tìm Kiếm
-							</button>
-						</div>
+				<div class="col-lg-7 col-md-7">
+					<form action="/product/search" method="post" class="container">
+						<input type="text" value="${keywords}"  style="width: 80%;
+                        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                        border-radius: 10px;line-height: 40px; margin: 0; border: solid 1px orange; outline: none" placeholder="Bạn đang tìm gì?" name="search">
+						<button type="submit" class="btn btn-warning" style="width: 15%; margin-left: 5px;
+                         height: 40px"><i class="fa-solid fa-magnifying-glass"></i></button>
 					</form>
 				</div>
-				<div class="col-lg-2 text-left col-md-3">
+				<div class="col-lg-3 text-left col-md-3">
 					<ul class="nav-right">
 						<li class="heart-icon"><a href="/favorite"> <i
 								class="icon_heart_alt"></i> <span>1</span>

@@ -2,6 +2,7 @@ package com.poly.app.controller;
 
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,31 +33,17 @@ import java.util.List;
 import jakarta.validation.Valid;
 
 @Controller
+@RequiredArgsConstructor
 public class IntoController {
 
-	@Autowired
-	AES cryptCode;
-
-	@Autowired
-	UsersServiceImpl usersServiceImpl;
-
-	@Autowired
-	CookieService cookieService;
-
-	@Autowired
-	SessionSevice sessionSevice;
-
-	@Autowired
-	ParamService paramService;
-
-	@Autowired
-	ShoppingCartServiceImpl shoppingCartServiceImpl;
-
-	@Autowired
-	OrdersDetailSeviceImpl ordersDetailSeviceImpl;
-
-	@Autowired
-	MailerServiceImpl mailerServiceImpl;
+	private final AES cryptCode;
+	private final UsersServiceImpl usersServiceImpl;
+	private final CookieService cookieService;
+	private final SessionSevice sessionSevice;
+	private final ParamService paramService;
+	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
+	private final OrdersDetailSeviceImpl ordersDetailSeviceImpl;
+	private final MailerServiceImpl mailerServiceImpl;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {
@@ -132,7 +119,6 @@ public class IntoController {
 
 	@GetMapping("login")
 	public String login(Model model) {
-
 		return "login";
 	}
 

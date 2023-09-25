@@ -4,9 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +19,19 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 @Service
+@RequiredArgsConstructor
 public class MailerServiceImpl implements MailerService {
 
-	@Autowired
-	JavaMailSender sender;
+
+	private final JavaMailSender sender;
 
 	private List<MailModel> list = new ArrayList<>();
 
 	@Override
+	@Async
 	public void send(MailModel mail) throws MessagingException {
 
 		MimeMessage message = sender.createMimeMessage();
-
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
 		helper.setFrom(mail.getForm());
 		helper.setTo(mail.getTo());

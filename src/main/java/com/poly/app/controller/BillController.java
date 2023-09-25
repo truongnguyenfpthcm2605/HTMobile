@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,27 +37,15 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("bill")
+@RequiredArgsConstructor
 public class BillController {
-	@Autowired
-	ShoppingCartServiceImpl shoppingCartServiceImpl;
-
-	@Autowired
-	OrdersServiceImpl ordersServiceImpl;
-
-	@Autowired
-	ProductServiceImpl productServiceImpl;
-
-	@Autowired
-	OrdersDetailSeviceImpl ordersDetailSeviceImpl;
-
-	@Autowired
-	SessionSevice sessionSevice;
-
-	@Autowired
-	ServletContext app;
-
-	@Autowired
-	MailerServiceImpl mailerServiceImpl;
+	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
+	private final OrdersServiceImpl ordersServiceImpl;
+	private final ProductServiceImpl productServiceImpl;
+	private final OrdersDetailSeviceImpl ordersDetailSeviceImpl;
+	private final SessionSevice sessionSevice;
+	private final ServletContext app;
+	private final MailerServiceImpl mailerServiceImpl;
 
 	@ModelAttribute("user")
 	public Users getUsers() {

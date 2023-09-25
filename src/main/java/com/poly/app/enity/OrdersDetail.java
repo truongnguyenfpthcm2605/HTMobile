@@ -14,8 +14,7 @@ import lombok.ToString;
 @Data
 @Entity
 @ToString
-@Table(name = "ordersDetail", uniqueConstraints = { @UniqueConstraint(columnNames = { "ordersid", "productid" }) })
-
+@Table(name = "ordersDetail")
 public class OrdersDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package com.poly.app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,22 +26,20 @@ import com.poly.app.util.Keyword;
 
 @Controller
 @RequestMapping("product")
+@RequiredArgsConstructor
 public class ProductController {
 	public static final Integer pageSize = 9;
-	@Autowired
-	ShoppingCartServiceImpl shoppingCartServiceImpl;
-	
-	@Autowired
-	SessionSevice sessionSevice;
+	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
+	private final SessionSevice sessionSevice;
+	private final  ProductServiceImpl productServiceImpl;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {
 		return shoppingCartServiceImpl.getCount() != 0 ? shoppingCartServiceImpl.getCount() : 0;
 	}
-	
-	
-	@Autowired
-	ProductServiceImpl productServiceImpl;
+
+
+
 	@GetMapping("views")
 	public String getAllProduct(Model model) {
 		model.addAttribute("pageProduct", getPage(0));

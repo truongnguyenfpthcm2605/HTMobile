@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +25,11 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("admin/gift")
+@RequiredArgsConstructor
 public class AdminGiftController {
 
-	@Autowired
-	VoucherServiceImpl voucherServiceImpl;
-
-	@Autowired
-	SessionSevice sessionSevice;
+	private final VoucherServiceImpl voucherServiceImpl;
+	private final SessionSevice sessionSevice;
 
 	@GetMapping("")
 	public String index(Model model) {

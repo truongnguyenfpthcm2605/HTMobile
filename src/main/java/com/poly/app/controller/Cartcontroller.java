@@ -4,6 +4,7 @@ package com.poly.app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,19 +29,13 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("cart")
+@RequiredArgsConstructor
 public class Cartcontroller {
 
-	@Autowired
-	ShoppingCartServiceImpl shoppingCartServiceImpl;
-
-	@Autowired
-	ProductServiceImpl productServiceImpl;
-
-	@Autowired
-	VoucherServiceImpl voucherServiceImpl;
-
-	@Autowired
-	SessionSevice sessionSevice;
+	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
+	private final ProductServiceImpl productServiceImpl;
+	private final VoucherServiceImpl voucherServiceImpl;
+	private final SessionSevice sessionSevice;
 
 	private double discout = 1;
 

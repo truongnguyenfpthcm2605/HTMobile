@@ -3,6 +3,7 @@ package com.poly.app.Impl;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,9 +14,10 @@ import com.poly.app.enity.Product;
 import com.poly.app.repository.ProductRepository;
 import com.poly.app.service.ProductService;
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl  implements ProductService{
-	@Autowired
-	ProductRepository dao;
+
+	private final ProductRepository dao;
 	
 	@Override
 	public Product save(Product product) {

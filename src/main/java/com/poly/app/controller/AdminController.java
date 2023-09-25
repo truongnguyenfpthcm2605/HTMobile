@@ -3,6 +3,7 @@ package com.poly.app.controller;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +17,13 @@ import com.poly.app.Impl.UsersServiceImpl;
 
 @Controller
 @RequestMapping("admin")
+@RequiredArgsConstructor
 public class AdminController {
 	
-	@Autowired
-	ProductServiceImpl productServiceImpl;
-	
-	@Autowired
-	OrdersServiceImpl ordersServiceImpl;
-	
-	@Autowired
-	UsersServiceImpl usersServiceImpl;
+
+	private final ProductServiceImpl productServiceImpl;
+	private final OrdersServiceImpl ordersServiceImpl;
+	private final UsersServiceImpl usersServiceImpl;
 	
 	@GetMapping("overview")
 	public String overview(Model model) {

@@ -2,6 +2,7 @@ package com.poly.app.controller;
 
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,17 +25,13 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("information")
+@RequiredArgsConstructor
 public class InformationController {
-	@Autowired
-	SessionSevice sessionSevice;
 
-	@Autowired
-	ShoppingCartServiceImpl shoppingCartServiceImpl;
-	@Autowired
-	UsersServiceImpl usersServiceImpl;
-	
-	@Autowired
-	AES aes;
+	private final SessionSevice sessionSevice;
+	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
+	private final UsersServiceImpl usersServiceImpl;
+	private final AES aes;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {

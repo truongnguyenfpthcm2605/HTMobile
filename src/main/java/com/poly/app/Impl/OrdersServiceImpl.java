@@ -3,6 +3,7 @@ package com.poly.app.Impl;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,11 @@ import com.poly.app.repository.OrdersRepository;
 import com.poly.app.service.OrdersService;
 
 @Service
+@RequiredArgsConstructor
 public class OrdersServiceImpl implements OrdersService {
 
-	@Autowired
-	OrdersRepository dao;
+
+	private final OrdersRepository dao;
 	@Override
 	public Orders save(Orders orders) {
 		return dao.save(orders);

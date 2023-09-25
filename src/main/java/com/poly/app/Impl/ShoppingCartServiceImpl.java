@@ -20,12 +20,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public void add(CartItem cart) {
 		CartItem cartExsits = map.get(cart.getId());
-		if(cartExsits==null) {
-			if(cart.getQty()>10) cart.setQty(9);
-			map.put(cart.getId(), cart);
-		}else {	
-			if(cart.getQty()>10) cart.setQty(9);
-			cartExsits.setQty(cartExsits.getQty()+1);
+        if(cart.getQty()>10) cart.setQty(9);
+        if(cartExsits==null) {
+            map.put(cart.getId(), cart);
+		}else {
+            cartExsits.setQty(cartExsits.getQty()+1);
 		}
 		
 	}

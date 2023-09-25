@@ -13,6 +13,15 @@
     <title>Tin Tức</title>
      <%@include file="/taglib/css.jsp" %>
 
+    <style>
+        .social-login a{
+            width: 80%;
+            margin: 10px auto;
+            border-radius: 5px;
+            box-shadow:0 8px 8px 0 rgba(103, 151, 255, .11), 0 12px 18px 0 rgba(103, 151, 255, .11);
+        }
+    </style>
+
 </head>
 <body>
 		<jsp:include page="header.jsp" />
@@ -60,6 +69,11 @@
                             <p style="color: red; font-size: 15px">${message }${param.error }</p>
                             <button type="submit" class="site-btn login-btn">Đăng Nhập</button>
                         </form>
+                        <div class="container social-login" style="display: flex; margin-top: 10px; justify-content: center; flex-direction: column; align-items: center">
+                            <a href="/oauth2/authorization/google" style="background-color: #EA4335; color: white; " class="btn"><i class="bx bxl-google"></i>Login with Google</a>
+                            <a href="/oauth2/authorization/facebook" style="background-color:#3B5998 ; color: white" class="btn"><i class="bx bxl-facebook-circle"></i>Login with Facebook</a>
+                            <a href="/oauth2/authorization/github" class="btn"><i class="bx bxl-github"></i>Login with Github</a>
+                        </div>
                         <div class="switch-login">
                             <a href="/register" class="or-login">Hoặc Tạo Tài Khoản Tại Đây</a>
                         </div>

@@ -19,16 +19,6 @@
 			<h2 style="margin: 20px; font-weight: 600;">Thông Tin Người Dùng</h2>
 			<div class="container">
 
-			<!--  	<div class="row">
-					<div class="col-md-6">
-						<img src="${pageContext.request.contextPath}/img/customer01.jpg"
-							alt="" style="width: 200px; height: 200px; border-radius: 50%;">
-						<br> <input type="file" style="margin: 10px;">
-					</div>
-			
-
-				</div>
-					-->
 				<form action="/admin/member/update" class="row" method="post"
 					style="margin-top: 10px;">
 					<div class="col-md-6">

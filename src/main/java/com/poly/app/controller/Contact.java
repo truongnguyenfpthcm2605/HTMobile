@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,16 +23,12 @@ import com.poly.app.util.Keyword;
 
 @Controller
 @RequestMapping("contact")
+@RequiredArgsConstructor
 public class Contact {
-	
-	@Autowired
-	FeedbackServiceImpl feedbackServiceImpl;
-	
-	@Autowired
-	MailerServiceImpl mailerServiceImpl;
-	
-	@Autowired
-	SessionSevice sessionSevice;
+
+	private final FeedbackServiceImpl feedbackServiceImpl;
+	private final MailerServiceImpl mailerServiceImpl;
+	private final SessionSevice sessionSevice;
 	@GetMapping("views")
 	public String index() {
 		return "contact";

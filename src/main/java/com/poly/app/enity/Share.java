@@ -14,19 +14,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "share", uniqueConstraints = { @UniqueConstraint(columnNames = { "userid", "productid" }) })
+@Table(name = "share")
 public class Share {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Integer id;
-		private Date createday;
-		private Integer number;
-		
-		@ManyToOne
-		@JoinColumn(name = "userid", referencedColumnName = "id")
-		private Users users;
-		
-		@ManyToOne
-		@JoinColumn(name = "productid", referencedColumnName = "id")
-		private Product product;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Date createday;
+    private Integer number;
+
+    @ManyToOne
+    @JoinColumn(name = "userid", referencedColumnName = "id")
+    private Users users;
+
+    @ManyToOne
+    @JoinColumn(name = "productid", referencedColumnName = "id")
+    private Product product;
 }

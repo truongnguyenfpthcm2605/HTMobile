@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,11 @@ import com.poly.app.enity.Voucher;
 import com.poly.app.repository.VoucherRepository;
 import com.poly.app.service.VoucherService;
 @Service
+@RequiredArgsConstructor
 public class VoucherServiceImpl implements VoucherService {
-	
-	@Autowired
-	VoucherRepository dao;
+
+
+	private final VoucherRepository dao;
 	@Override
 	public Voucher save(Voucher voucher) {
 		return dao.save(voucher);

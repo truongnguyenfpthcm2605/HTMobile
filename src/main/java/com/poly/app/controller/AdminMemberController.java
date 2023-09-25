@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,14 +27,11 @@ import jakarta.servlet.ServletContext;
 
 @Controller
 @RequestMapping("admin/member")
+@RequiredArgsConstructor
 public class AdminMemberController {
-	
-	@Autowired
-	UsersServiceImpl usersServiceImpl;
-	
-	@Autowired
-	ServletContext app;
-	
+
+	private final UsersServiceImpl usersServiceImpl;
+	private final ServletContext app;
 
 	@GetMapping("")
 	public String index(Model model) {
