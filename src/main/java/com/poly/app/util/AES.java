@@ -15,7 +15,7 @@ public class AES {
 	private static byte[] key;
 
 	public static void setKey(final String myKey) {
-		MessageDigest sha = null;
+		MessageDigest sha ;
 		try {
 			key = myKey.getBytes("UTF-8");
 			sha = MessageDigest.getInstance("SHA-1");
@@ -34,7 +34,7 @@ public class AES {
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 			return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
 		} catch (Exception e) {
-			System.out.println("Error while encrypting: " + e.toString());
+			System.out.println("Error while encrypting: " + e);
 		}
 		return null;
 	}
@@ -46,16 +46,12 @@ public class AES {
 			cipher.init(Cipher.DECRYPT_MODE, secretKey);
 			return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
 		} catch (Exception e) {
-			System.out.println("Error while decrypting: " + e.toString());
+			System.out.println("Error while decrypting: " + e);
 		}
 		return null;
 	}
+
 	public static void main(String[] args) {
-		final String secretKey = "Mainkey";
-
-		String decryptedString = AES.decrypt("KxAawz8nPqnocuTKeqSZpw==", secretKey) ;
-
-
-		System.out.println(decryptedString);
+		System.out.println(AES.decrypt("KxAawz8nPqnocuTKeqSZpw==",Keyword.keyCode));
 	}
 }

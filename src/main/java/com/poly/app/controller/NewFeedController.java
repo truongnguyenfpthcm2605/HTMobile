@@ -19,7 +19,6 @@ public class NewFeedController {
 		return "newfeed";
 	}
 
-
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {
 		return shoppingCartServiceImpl.getCount() != 0 ? shoppingCartServiceImpl.getCount() : 0;

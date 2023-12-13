@@ -36,7 +36,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	@Override
 	public CartItem update(Integer id, int qty) {
-	
 		CartItem cartExsits = map.get(id);
 		cartExsits.setQty(qty);
 		return cartExsits;
@@ -45,14 +44,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public void clear() {
 		map.clear();
-		
 	}
 
 	@Override
 	public List<CartItem> getAllCartItem() {
 		return new ArrayList<>(map.values());
 	}
-
 
 	@Override
 	public int getCount() {

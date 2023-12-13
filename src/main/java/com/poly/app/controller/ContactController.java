@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,7 @@ import com.poly.app.util.Keyword;
 @Controller
 @RequestMapping("contact")
 @RequiredArgsConstructor
-public class Contact {
+public class ContactController {
 
 	private final FeedbackServiceImpl feedbackServiceImpl;
 	private final MailerServiceImpl mailerServiceImpl;
@@ -37,7 +36,7 @@ public class Contact {
 	@GetMapping("report")
 	@ResponseBody
 	public ResponseEntity<String> report(@RequestParam("content") Optional<String> content) {
-		Users users = (Users) sessionSevice.getAttribute(Keyword.acc);
+		Users users = sessionSevice.getAttribute(Keyword.acc);
 		if(users!=null) {
 			Feedback feedback = new Feedback();
 			feedback.setCreateday(new Date());

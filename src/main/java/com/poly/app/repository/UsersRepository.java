@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.poly.app.enity.Users;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 	@Query("SELECT u FROM Users u WHERE u.email = :email AND u.password = :password and u.active =1")
 	Users checkLogin(@Param("email") String email, @Param("password") String password);

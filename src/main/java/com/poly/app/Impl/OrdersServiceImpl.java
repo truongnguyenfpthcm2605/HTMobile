@@ -11,18 +11,22 @@ import org.springframework.stereotype.Service;
 import com.poly.app.enity.Orders;
 import com.poly.app.repository.OrdersRepository;
 import com.poly.app.service.OrdersService;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class OrdersServiceImpl implements OrdersService {
 
-
 	private final OrdersRepository dao;
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Orders save(Orders orders) {
 		return dao.save(orders);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Orders update(Orders orders) {
 		return dao.save(orders);
@@ -38,10 +42,10 @@ public class OrdersServiceImpl implements OrdersService {
 		return dao.findAll();
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
-		
 	}
 
 	@Override

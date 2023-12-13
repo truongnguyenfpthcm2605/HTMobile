@@ -11,7 +11,6 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableAsync(proxyTargetClass = true)
 public class AsyncConfiguration implements AsyncConfigurer {
-
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -23,7 +22,6 @@ public class AsyncConfiguration implements AsyncConfigurer {
         executor.initialize();
         return executor;
     }
-
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return AsyncConfigurer.super.getAsyncUncaughtExceptionHandler();

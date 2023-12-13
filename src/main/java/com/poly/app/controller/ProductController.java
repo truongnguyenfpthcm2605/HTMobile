@@ -3,6 +3,7 @@ package com.poly.app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.poly.app.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,17 +29,15 @@ import com.poly.app.util.Keyword;
 @RequestMapping("product")
 @RequiredArgsConstructor
 public class ProductController {
-	public static final Integer pageSize = 9;
+	public static final Integer PAGE_SĨZE = 9;
 	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
 	private final SessionSevice sessionSevice;
-	private final  ProductServiceImpl productServiceImpl;
+	private final ProductService productService;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {
 		return shoppingCartServiceImpl.getCount() != 0 ? shoppingCartServiceImpl.getCount() : 0;
 	}
-
-
 
 	@GetMapping("views")
 	public String getAllProduct(Model model) {
@@ -48,41 +47,38 @@ public class ProductController {
 	
 	@GetMapping("page")
 	public String Page(Model model,@RequestParam("p") Optional<Integer> p) {
-		String keyw = (String)sessionSevice.getAttribute(Keyword.search);
+		String keyw = sessionSevice.getAttribute(Keyword.search);
 		if(keyw!=null) {
-			Pageable pageable = PageRequest.of(p.orElse(0), pageSize);
-			Page<Product> page = productServiceImpl.findByKeywords("%"+keyw+"%", pageable);
+			Pageable pageable = PageRequest.of(p.orElse(0), PAGE_SĨZE);
+			Page<Product> page = productService.findByKeywords("%"+keyw+"%", pageable);
 			model.addAttribute("pageProduct", page);
 			
 		}else {
 			model.addAttribute("pageProduct", getPage(p.orElse(0)));
 		}
-		
 		return "allproduct";
-		
 	}
 	
 	@GetMapping("detail")
 	public String detail(Model model , @RequestParam("id") Optional<Integer> id) {
-		Product product = productServiceImpl.findById(id.orElse(1)).get();
+		Product product = productService.findById(id.orElse(1)).get();
 		product.setViews(product.getViews()+1);
 		String[] thumnail = product.getThumnail().split("-");
-		List<Product> productRecomend = productServiceImpl.findProductsByCategoryId(product.getCategory().getId(), 4);
+		List<Product> productRecomend = productService.findProductsByCategoryId(product.getCategory().getId(), 4);
 		if(productRecomend!=null) {
 			model.addAttribute("pc", productRecomend);
 		}
-		productServiceImpl.update(product);
+		productService.update(product);
 		model.addAttribute("p", product);
 		model.addAttribute("images", thumnail);
-		
 		return "detailproduct";
 	}
 	
 	@PostMapping("search")
 	private String search(Model model,@RequestParam("search") Optional<String> keyword) {
-		Pageable pageable = PageRequest.of(0, pageSize);
+		Pageable pageable = PageRequest.of(0, PAGE_SĨZE);
 		sessionSevice.setAttribute(Keyword.search, keyword.orElse(""));
-		Page<Product> page = productServiceImpl.findByKeywords("%"+keyword.orElse("")+"%", pageable);
+		Page<Product> page = productService.findByKeywords("%"+keyword.orElse("")+"%", pageable);
 		model.addAttribute("pageProduct", page);
 		model.addAttribute("keywords", keyword.orElse(""));
 		return "allproduct";
@@ -116,15 +112,15 @@ public class ProductController {
 	}
 	
 	public Page<Product> getPage(Integer number){
-		Pageable pageable = PageRequest.of(number, pageSize);
-		Page<Product> page = productServiceImpl.findAll(pageable);
+		Pageable pageable = PageRequest.of(number, PAGE_SĨZE);
+		Page<Product> page = productService.findAll(pageable);
 		return page;
 	}
 	
 	
 	public Page<Product> getPage(Integer number,Sort sort){
-		Pageable pageable = PageRequest.of(number, pageSize,sort);
-		Page<Product> page = productServiceImpl.findAll(pageable);
+		Pageable pageable = PageRequest.of(number, PAGE_SĨZE,sort);
+		Page<Product> page = productService.findAll(pageable);
 		return page;
 	}
 }

@@ -13,13 +13,16 @@ import org.springframework.stereotype.Service;
 import com.poly.app.enity.Users;
 import com.poly.app.repository.UsersRepository;
 import com.poly.app.service.UsersService;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
-
 	private final  UsersRepository dao;
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Users save(Users users) {
 		if (findByEmail(users.getEmail())!=null) {
@@ -27,6 +30,7 @@ public class UsersServiceImpl implements UsersService {
 		}
 		return dao.save(users);
 	}
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Users update(Users users) {
 		return dao.save(users);
@@ -37,6 +41,7 @@ public class UsersServiceImpl implements UsersService {
 		return dao.findById(id);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
@@ -64,7 +69,6 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public Users findByEmail(String email) {
-		
 		return dao.getByEmail(email);
 	}
 

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.poly.app.enity.Categories;
 import com.poly.app.repository.CategoriesRepository;
 import com.poly.app.service.CategoriesSevice;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,11 +20,13 @@ public class CategoriesServiceImpl implements CategoriesSevice {
 
 	private final  CategoriesRepository dao;
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Categories save(Categories categories) {
 		return dao.save(categories);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Categories update(Categories categories) {
 		return dao.save(categories);
@@ -37,12 +42,9 @@ public class CategoriesServiceImpl implements CategoriesSevice {
 		return dao.findAll();
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
-		
 	}
-	
-	
-
 }

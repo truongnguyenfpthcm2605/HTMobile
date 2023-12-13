@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.poly.app.enity.Feedback;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
-	
 	@Query("select o from Feedback o where o.users.fullname like ?1 ")
 	List<Feedback> findByKeyWordLike(String name);
 	

@@ -21,8 +21,6 @@ import jakarta.mail.internet.MimeMessage;
 @Service
 @RequiredArgsConstructor
 public class MailerServiceImpl implements MailerService {
-
-
 	private final JavaMailSender sender;
 
 	private List<MailModel> list = new ArrayList<>();
@@ -30,7 +28,6 @@ public class MailerServiceImpl implements MailerService {
 	@Override
 	@Async
 	public void send(MailModel mail) throws MessagingException {
-
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
 		helper.setFrom(mail.getForm());
@@ -57,7 +54,6 @@ public class MailerServiceImpl implements MailerService {
 				System.out.println(file.getName());
 			}
 		}
-
 		sender.send(message);
 
 	}

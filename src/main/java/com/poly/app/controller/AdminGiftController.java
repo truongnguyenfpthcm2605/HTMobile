@@ -27,10 +27,8 @@ import jakarta.validation.Valid;
 @RequestMapping("admin/gift")
 @RequiredArgsConstructor
 public class AdminGiftController {
-
 	private final VoucherServiceImpl voucherServiceImpl;
 	private final SessionSevice sessionSevice;
-
 	@GetMapping("")
 	public String index(Model model) {
 		model.addAttribute("listGift", voucherServiceImpl.findAll());

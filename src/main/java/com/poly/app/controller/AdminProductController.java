@@ -23,7 +23,6 @@ import java.util.Optional;
 @RequestMapping("admin/product")
 @RequiredArgsConstructor
 public class AdminProductController {
-
 	private final ProductServiceImpl productServiceImpl;
 	private final CategoriesServiceImpl categoriesServiceImpl;
 	private final SessionSevice sessionSevice;
@@ -83,14 +82,23 @@ public class AdminProductController {
 		return "adminproduct";
 	}
 
-	@PostMapping("/update")
-	private String update(Model model, @RequestParam("title") String title, @RequestParam("pricecost") Double pricecost,
-			@RequestParam("price") Double price, @RequestParam("quanityfinal") Integer quanityfinal,
-			@RequestParam("chip") String Chip, @RequestParam("description") String description,
-			@RequestParam("category") Integer category, @RequestParam("ram") Integer ram,
-			@RequestParam("rom") Integer rom, @RequestParam("pin") Integer pin, @RequestParam("camera") Integer camera,
-			@RequestParam("screen") Double screen, @RequestParam("imgproduct") MultipartFile fileimg,
-			@RequestParam("thumnail") MultipartFile[] thumnail, @RequestParam("id") Optional<Integer> id) {
+	@PostMapping("update")
+	private String update(Model model,
+			@RequestParam("title") String title,
+			@RequestParam("pricecost") Double pricecost,
+			@RequestParam("price") Double price,
+			@RequestParam("quanityfinal") Integer quanityfinal,
+			@RequestParam("chip") String Chip,
+			@RequestParam("description") String description,
+			@RequestParam("category") Integer category,
+			@RequestParam("ram") Integer ram,
+			@RequestParam("rom") Integer rom,
+			@RequestParam("pin") Integer pin,
+			@RequestParam("camera") Integer camera,
+			@RequestParam("screen") Double screen,
+			@RequestParam("imgproduct") MultipartFile fileimg,
+			@RequestParam("thumnail") MultipartFile[] thumnail,
+			@RequestParam("id") Optional<Integer> id) {
 
 		Categories categories = categoriesServiceImpl.findById(category).get();
 
@@ -98,7 +106,7 @@ public class AdminProductController {
 		String files = "";
 		Product product =null;
 		try {
-			String action = (String) sessionSevice.getAttribute("action");
+			String action =  sessionSevice.getAttribute("action");
 			main = paramService.save(fileimg, "/img/products");
 			files = paramService.getStringfiles(thumnail, "/img/detailproduct");
 			try {
@@ -109,19 +117,17 @@ public class AdminProductController {
 			Product pro = convertToProduct(product, title, pricecost, price, quanityfinal, Chip, description,
 					categories, ram, rom, pin, camera, screen, main.getName(), files);
 			if (action.equals("update")) {
-				System.out.println("update");
 				pro.setUpdateday(new Date());
 				productServiceImpl.update(pro);
 
 			} else {
-				System.out.println("insert");
 				pro.setCreateday(new Date());
 				pro.setUpdateday(new Date());
 				pro.setQuantitysold(0);
 				productServiceImpl.save(pro);
 
 			}
-			return "redirect:/admin/product";
+			return "redirect:/admin/product/";
 		} catch (Exception e) {
 			Product pro = convertToProduct(product, title, pricecost, price, quanityfinal, Chip, description, categories,
 					ram, rom, pin, camera, screen, "", "");

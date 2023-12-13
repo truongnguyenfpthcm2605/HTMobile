@@ -10,8 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.poly.app.enity.Product;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query("SELECT p FROM Product p WHERE p.category.id = :categoryId")
     List<Product> findProductsByCategoryId(@Param("categoryId") Integer categoryId);
@@ -31,8 +32,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	 
 	 @Query("SELECT o FROM Product o WHERE o.title LIKE :keywords or o.category.title Like :keywords ")
 	 List<Product> findByKeywordsSearch(@Param("keywords") String key);
-	 
-	 
+
 	 @Query("select o from Product o where MONTH(o.createday) = ?1")
 	 Optional<List<Product>> findByProductMonth(Integer month);
 	 

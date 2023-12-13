@@ -35,7 +35,6 @@ public class WriteWord {
 			Voucher voucher,String path) {
 		try {
 			XWPFDocument document = new XWPFDocument();
-			
 			XWPFParagraph paragraph = document.createParagraph();
 			paragraph.setAlignment(ParagraphAlignment.CENTER);
 			

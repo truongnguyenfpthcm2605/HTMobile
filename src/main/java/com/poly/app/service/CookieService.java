@@ -1,5 +1,6 @@
 package com.poly.app.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +9,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
+@RequiredArgsConstructor
 public class CookieService {
-	@Autowired
-	HttpServletResponse response;
-	
-	@Autowired
-	HttpServletRequest request;
+
+	private final HttpServletResponse response;
+	private final HttpServletRequest request;
 	
 	public void add(String name,String value, int days) {
 		Cookie cookie = new Cookie(name, value);
@@ -32,7 +32,7 @@ public class CookieService {
 		}
 		return null;
 	}
-	
+
 	public void remove(String name) {
 		Cookie[] cookie = request.getCookies();
 		if(cookie!=null) {

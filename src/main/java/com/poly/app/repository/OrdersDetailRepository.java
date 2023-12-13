@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.poly.app.enity.OrdersDetail;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrdersDetailRepository extends JpaRepository<OrdersDetail, Integer> {
 	@Query("SELECT od FROM Orders o JOIN o.ordersDetails od WHERE o.id = ?1")
 	Optional<List<OrdersDetail>> findByOrders(Integer idOrders);

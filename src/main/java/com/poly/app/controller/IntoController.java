@@ -1,19 +1,5 @@
 package com.poly.app.controller;
 
-import java.util.Optional;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.poly.app.Impl.MailerServiceImpl;
 import com.poly.app.Impl.OrdersDetailSeviceImpl;
 import com.poly.app.Impl.ShoppingCartServiceImpl;
@@ -22,25 +8,28 @@ import com.poly.app.dto.UsersRegister;
 import com.poly.app.enity.OrdersDetail;
 import com.poly.app.enity.Users;
 import com.poly.app.service.CookieService;
-import com.poly.app.service.ParamService;
 import com.poly.app.service.SessionSevice;
 import com.poly.app.util.AES;
 import com.poly.app.util.Keyword;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-
-import jakarta.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class IntoController {
 
-	private final AES cryptCode;
 	private final UsersServiceImpl usersServiceImpl;
 	private final CookieService cookieService;
 	private final SessionSevice sessionSevice;
-	private final ParamService paramService;
 	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
 	private final OrdersDetailSeviceImpl ordersDetailSeviceImpl;
 	private final MailerServiceImpl mailerServiceImpl;

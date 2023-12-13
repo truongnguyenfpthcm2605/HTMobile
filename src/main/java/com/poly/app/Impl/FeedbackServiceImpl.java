@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import com.poly.app.enity.Feedback;
 import com.poly.app.repository.FeedbackRepository;
 import com.poly.app.service.FeedbackService;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,11 +21,13 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 	private final  FeedbackRepository dao;
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Feedback save(Feedback feedback) {
 		return dao.save(feedback);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Feedback update(Feedback feedback) {
 		return dao.save(feedback);
@@ -33,12 +38,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 		return dao.findById(id);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
-
 	}
-
 	@Override
 	public List<Feedback> findAll() {
 		return dao.findAll();

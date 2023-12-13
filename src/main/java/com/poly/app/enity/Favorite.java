@@ -16,17 +16,17 @@ import lombok.Data;
 @Entity
 @Table(name = "favorite")
 public class Favorite {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Integer id;
-		private Date createday;
-		private Boolean active;
-		
-		@ManyToOne
-		@JoinColumn(name = "userid", referencedColumnName = "id")
-		private Users users;
-		
-		@ManyToOne
-		@JoinColumn(name = "productid", referencedColumnName = "id")
-		private Product product;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Date createday;
+    private Boolean active;
+
+    @ManyToOne
+    @JoinColumn(name = "userid", referencedColumnName = "id")
+    private Users users;
+
+    @ManyToOne
+    @JoinColumn(name = "productid", referencedColumnName = "id")
+    private Product product;
 }

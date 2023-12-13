@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.poly.app.enity.Orders;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 	
 		@Query("select count(o) from Orders o")

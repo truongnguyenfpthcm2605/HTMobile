@@ -25,11 +25,8 @@ import com.poly.app.util.SortAnPage;
 @RequestMapping("admin/feedback")
 @RequiredArgsConstructor
 public class AdminFeedbackController {
-
 	private final FeedbackServiceImpl feedbackServiceImpl;
-
 	private final MailerServiceImpl mailerServiceImpl;
-
 	@GetMapping("")
 	private String view(Model model) {
 		model.addAttribute("ListFeedback", feedbackServiceImpl.findAll(SortAnPage.getSort("createday")));

@@ -31,7 +31,6 @@ public class InformationController {
 	private final SessionSevice sessionSevice;
 	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
 	private final UsersServiceImpl usersServiceImpl;
-	private final AES aes;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {

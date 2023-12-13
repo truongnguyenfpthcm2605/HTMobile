@@ -27,7 +27,6 @@
 				<form action="/admin/product/update" class="row"
 					style="margin-top: 10px;" enctype="multipart/form-data"
 					method="post">
-
 					<div class="col-md-12" style="margin-bottom: 15px">
 						<c:choose>
 							<c:when test="${not empty p }">
@@ -108,7 +107,7 @@
 							<label>Memory *</label> <br> <select name="rom"
 								class="form-control">
 								<c:forEach items="${listRom}" var="rom">
-									<option value="${rom}  ${p.rom==rom?'selected':''}">${rom }GB</option>
+									<option value="${rom}  ${p.rom==rom ?'selected':''}">${rom}GB</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -154,19 +153,18 @@
 	<%@include file="/taglib/adminjs.jsp"%>
 	<script>
 		function previewFile(event) {
-			var input = event.target;
-			var reader = new FileReader();
+			let input = event.target;
+			let reader = new FileReader();
 
 			reader.onload = function() {
-				var image = document.getElementById('previewImage');
+				let image = document.getElementById('previewImage');
 				image.src = reader.result;
 			};
 
 			if (input.files && input.files[0]) {
 				reader.readAsDataURL(input.files[0]);
 			} else {
-				// Nếu không có tệp tin nào được chọn, hiển thị ảnh mặc định
-				var image = document.getElementById('previewImage');
+				let image = document.getElementById('previewImage');
 				image.src = "/img/anhmacdinh.jpg";
 			}
 		}

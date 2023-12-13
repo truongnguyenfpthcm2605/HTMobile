@@ -24,6 +24,6 @@ public interface ProductService {
 	List<Product> findByKeywordsSearch(String key);
 	Optional<List<Product>> findByProductMonth(Integer month);
 	List<Product> findBycategory(Integer id);
-	  List<Product> findTop10ByViewsDesc();
+	List<Product> findTop10ByViewsDesc();
 	
 }

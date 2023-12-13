@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.poly.app.enity.Voucher;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface VoucherRepository  extends JpaRepository<Voucher,String >{
 	
 	@Query("select o from Voucher o where o.id=?1 and o.endday > ?2 and o.active = ?3 ")

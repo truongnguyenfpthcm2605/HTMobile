@@ -12,20 +12,24 @@ import org.springframework.stereotype.Service;
 import com.poly.app.enity.Voucher;
 import com.poly.app.repository.VoucherRepository;
 import com.poly.app.service.VoucherService;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class VoucherServiceImpl implements VoucherService {
 
-
 	private final VoucherRepository dao;
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Voucher save(Voucher voucher) {
 		return dao.save(voucher);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Voucher update(Voucher voucher) {
-		
 		return dao.save(voucher);
 	}
 
@@ -34,10 +38,10 @@ public class VoucherServiceImpl implements VoucherService {
 		return dao.findById(id);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public void deleteById(String id) {
 		dao.deleteById(id);
-		
 	}
 
 	@Override

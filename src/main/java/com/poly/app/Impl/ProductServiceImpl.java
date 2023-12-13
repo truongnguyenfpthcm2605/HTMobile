@@ -13,17 +13,22 @@ import org.springframework.stereotype.Service;
 import com.poly.app.enity.Product;
 import com.poly.app.repository.ProductRepository;
 import com.poly.app.service.ProductService;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl  implements ProductService{
 
 	private final ProductRepository dao;
-	
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Product save(Product product) {
 		return dao.save(product);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public Product update(Product product) {
 		return dao.save(product);
@@ -34,19 +39,16 @@ public class ProductServiceImpl  implements ProductService{
 		return dao.findById(id);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@Override
 	public void deleteByid(Integer id) {
 		dao.deleteById(id);
 		
 	}
-
 	@Override
 	public List<Product> findAll() {
 		return dao.findAll();
 	}
-
-
-
 	@Override
 	public Page<Product> findAll(Pageable pageable) {
 		return dao.findAll(pageable);

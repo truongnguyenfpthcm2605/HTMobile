@@ -29,7 +29,6 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin/member")
 @RequiredArgsConstructor
 public class AdminMemberController {
-
 	private final UsersServiceImpl usersServiceImpl;
 	private final ServletContext app;
 
