@@ -84,7 +84,7 @@ public class AdminProductController {
 		return "adminproduct";
 	}
 
-	@PostMapping("update")
+	@PostMapping("/update")
 	private String update(Model model,
 			@RequestParam("title") String title,
 			@RequestParam("pricecost") Double pricecost,
@@ -129,7 +129,8 @@ public class AdminProductController {
 				productServiceImpl.save(pro);
 
 			}
-			return "redirect:/admin/product/";
+			pro = new Product();
+			return "redirect:/admin/product";
 		} catch (Exception e) {
 			Product pro = convertToProduct(product, title, pricecost, price, quanityfinal, Chip, description, categories,
 					ram, rom, pin, camera, screen, "", "");

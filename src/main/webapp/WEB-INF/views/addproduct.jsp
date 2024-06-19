@@ -139,12 +139,12 @@
 
 
                     <div class="form-group">
-                        <button class=" btn btn-light" type="submit"
+                        <a class=" btn btn-light" href="admin/product/"
                                 style="width: 40%; margin: 10px 10px; border-radius: 5px;">
                             Trở Lại
-                        </button>
-                        <input type="submit" class=" btn btn-dark" value="Lưu"
-                               style="width: 40%; margin: 10px 10px; border-radius: 5px;">
+                        </a>
+                        <button type="submit" class=" btn btn-dark"
+                               style="width: 40%; margin: 10px 10px; border-radius: 5px;">Lưu</button>
                     </div>
 
                 </div>
