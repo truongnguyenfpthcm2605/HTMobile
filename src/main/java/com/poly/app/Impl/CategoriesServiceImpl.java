@@ -4,19 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poly.app.enity.Categories;
 import com.poly.app.repository.CategoriesRepository;
-import com.poly.app.service.CategoriesSevice;
+import com.poly.app.service.CategoriesService;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CategoriesServiceImpl implements CategoriesSevice {
+public class CategoriesServiceImpl implements CategoriesService {
 
 	private final  CategoriesRepository dao;
 

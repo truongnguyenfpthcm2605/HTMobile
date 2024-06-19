@@ -2,6 +2,8 @@ package com.poly.app.controller;
 
 import java.util.List;
 
+import com.poly.app.service.ProductService;
+import com.poly.app.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +19,8 @@ import com.poly.app.enity.Product;
 @RequiredArgsConstructor
 public class HomeController {
 
-	private final ProductServiceImpl productServiceImpl;
-	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
+	private final ProductService productServiceImpl;
+	private final ShoppingCartService shoppingCartServiceImpl;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {

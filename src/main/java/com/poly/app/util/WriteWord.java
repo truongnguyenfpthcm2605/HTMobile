@@ -1,7 +1,15 @@
 package com.poly.app.util;
 
-import java.io.FileOutputStream;
+import com.poly.app.dto.CartItem;
+import com.poly.app.enity.Orders;
+import com.poly.app.enity.Users;
+import com.poly.app.enity.Voucher;
+import org.apache.poi.xwpf.usermodel.*;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
 
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -9,25 +17,6 @@ import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
-
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
-
-import com.poly.app.dto.CartItem;
-import com.poly.app.enity.Orders;
-import com.poly.app.enity.Users;
-import com.poly.app.enity.Voucher;
-
-import jakarta.servlet.ServletContext;
 
 public class WriteWord {
 

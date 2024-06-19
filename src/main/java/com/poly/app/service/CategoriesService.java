@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.poly.app.enity.Categories;
 
-public interface CategoriesSevice {
+public interface CategoriesService {
 		
 	Categories save(Categories categories);
 	Categories update(Categories categories);

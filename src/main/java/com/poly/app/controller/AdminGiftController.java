@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.poly.app.service.VoucherService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.app.Impl.VoucherServiceImpl;
 import com.poly.app.enity.Voucher;
-import com.poly.app.service.SessionSevice;
+import com.poly.app.service.SessionService;
 import com.poly.app.util.SortAnPage;
 
 import jakarta.validation.Valid;
@@ -27,8 +27,8 @@ import jakarta.validation.Valid;
 @RequestMapping("admin/gift")
 @RequiredArgsConstructor
 public class AdminGiftController {
-	private final VoucherServiceImpl voucherServiceImpl;
-	private final SessionSevice sessionSevice;
+	private final VoucherService voucherServiceImpl;
+	private final SessionService sessionService;
 	@GetMapping("")
 	public String index(Model model) {
 		model.addAttribute("listGift", voucherServiceImpl.findAll());
@@ -38,9 +38,9 @@ public class AdminGiftController {
 	@GetMapping("add")
 	public String add(Model model) {
 		Voucher voucher = new Voucher();
-		sessionSevice.setAttribute("action", "add");
+		sessionService.setAttribute("action", "add");
 		model.addAttribute("voucher", voucher);
-		sessionSevice.removeAttribute("v");
+		sessionService.removeAttribute("v");
 		return "addgift";
 	}
 
@@ -48,8 +48,8 @@ public class AdminGiftController {
 	public String view(@PathVariable("id") String id, Model model) {
 		Voucher voucher = voucherServiceImpl.findById(id).get();
 		model.addAttribute("voucher", voucher);
-		sessionSevice.setAttribute("v", voucher);
-		sessionSevice.setAttribute("action", "update");
+		sessionService.setAttribute("v", voucher);
+		sessionService.setAttribute("action", "update");
 		return "addgift";
 	}
 
@@ -105,7 +105,7 @@ public class AdminGiftController {
 			Model model) {
 
 		Voucher voucherNew = voucher.get();
-		String action = (String) sessionSevice.getAttribute("action");
+		String action = (String) sessionService.getAttribute("action");
 		if (result.hasErrors()) {
 			model.addAttribute("message", "Nhập đúng thông tin");
 		} else {

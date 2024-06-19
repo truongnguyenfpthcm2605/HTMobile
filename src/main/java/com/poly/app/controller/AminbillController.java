@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.poly.app.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +21,10 @@ import com.poly.app.Impl.OrdersServiceImpl;
 import com.poly.app.Impl.VoucherServiceImpl;
 import com.poly.app.dto.CartItem;
 import com.poly.app.dto.MailModel;
-import com.poly.app.enity.Categories;
 import com.poly.app.enity.Orders;
 import com.poly.app.enity.OrdersDetail;
 import com.poly.app.enity.Users;
 import com.poly.app.enity.Voucher;
-import com.poly.app.service.SessionSevice;
 import com.poly.app.util.WriteWord;
 
 import jakarta.servlet.ServletContext;
@@ -36,12 +34,12 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin/bill")
 @RequiredArgsConstructor
 public class AminbillController {
-	private final OrdersServiceImpl ordersServiceImpl;
-	private final OrdersDetailSeviceImpl ordersDetailSeviceImpl;
-	private  final VoucherServiceImpl voucherServiceImpl;
-	private final SessionSevice sessionSevice;
+	private final OrdersService ordersServiceImpl;
+	private final OrdersDetailService ordersDetailSeviceImpl;
+	private  final VoucherService voucherServiceImpl;
+	private final SessionService sessionService;
 	private final ServletContext app;
-	private final MailerServiceImpl mailerServiceImpl;
+	private final MailerService mailerServiceImpl;
 
 	@GetMapping("")
 	public String index(Model model) {
@@ -51,7 +49,7 @@ public class AminbillController {
 
 	@GetMapping("view/{id}")
 	public String view(Model model, @PathVariable("id") Integer id) {
-		sessionSevice.setAttribute("id", id);
+		sessionService.setAttribute("id", id);
 		Orders orders = ordersServiceImpl.findById(id).get();
 		List<OrdersDetail> list = getDetails(id);
 		Voucher voucher = getVoucher(orders);

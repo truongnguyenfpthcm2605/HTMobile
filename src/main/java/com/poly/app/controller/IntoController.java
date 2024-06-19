@@ -1,14 +1,9 @@
 package com.poly.app.controller;
 
-import com.poly.app.Impl.MailerServiceImpl;
-import com.poly.app.Impl.OrdersDetailSeviceImpl;
-import com.poly.app.Impl.ShoppingCartServiceImpl;
-import com.poly.app.Impl.UsersServiceImpl;
 import com.poly.app.dto.UsersRegister;
 import com.poly.app.enity.OrdersDetail;
 import com.poly.app.enity.Users;
-import com.poly.app.service.CookieService;
-import com.poly.app.service.SessionSevice;
+import com.poly.app.service.*;
 import com.poly.app.util.AES;
 import com.poly.app.util.Keyword;
 import jakarta.validation.Valid;
@@ -27,12 +22,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class IntoController {
 
-	private final UsersServiceImpl usersServiceImpl;
+	private final UsersService usersServiceImpl;
 	private final CookieService cookieService;
-	private final SessionSevice sessionSevice;
-	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
-	private final OrdersDetailSeviceImpl ordersDetailSeviceImpl;
-	private final MailerServiceImpl mailerServiceImpl;
+	private final SessionService sessionService;
+	private final ShoppingCartService shoppingCartServiceImpl;
+	private final OrdersDetailService ordersDetailSeviceImpl;
+	private final MailerService mailerServiceImpl;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {
@@ -63,7 +58,7 @@ public class IntoController {
 			} else {
 				Users user = getUser(us);
 				if (usersServiceImpl.save(user) != null) {
-					sessionSevice.setAttribute(Keyword.acc, user);
+					sessionService.setAttribute(Keyword.acc, user);
 					return "redirect:/index";
 				}
 
@@ -123,8 +118,8 @@ public class IntoController {
 		if (user != null) {
 			int day = rememberMe ? 1 : 0;
 			cookieService.add("username", email.orElse("none"), day);
-			sessionSevice.setAttribute(Keyword.acc, user);
-			String uri = sessionSevice.getAttribute("security-uri");
+			sessionService.setAttribute(Keyword.acc, user);
+			String uri = sessionService.getAttribute("security-uri");
 
 			if (uri != null) {
 				return "redirect:" + uri;
@@ -138,13 +133,13 @@ public class IntoController {
 
 	@GetMapping("logout")
 	public String logout() {
-		sessionSevice.removeAttribute(Keyword.acc);
+		sessionService.removeAttribute(Keyword.acc);
 		return "redirect:/index";
 	}
 
 	@GetMapping("history")
 	public String history(Model model) {
-		Users users = sessionSevice.getAttribute(Keyword.acc);
+		Users users = sessionService.getAttribute(Keyword.acc);
 		List<OrdersDetail> list = ordersDetailSeviceImpl.findOrdersDetailsByUserId(users.getId());
 		model.addAttribute("listHistory", list);
 		return "history";

@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.poly.app.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +28,6 @@ import com.poly.app.enity.OrdersDetail;
 import com.poly.app.enity.Product;
 import com.poly.app.enity.Users;
 import com.poly.app.enity.Voucher;
-import com.poly.app.service.SessionSevice;
 import com.poly.app.util.Keyword;
 import com.poly.app.util.WriteWord;
 
@@ -39,17 +38,17 @@ import jakarta.validation.Valid;
 @RequestMapping("bill")
 @RequiredArgsConstructor
 public class BillController {
-	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
-	private final OrdersServiceImpl ordersServiceImpl;
-	private final ProductServiceImpl productServiceImpl;
-	private final OrdersDetailSeviceImpl ordersDetailSeviceImpl;
-	private final SessionSevice sessionSevice;
+	private final ShoppingCartService shoppingCartServiceImpl;
+	private final OrdersService ordersServiceImpl;
+	private final ProductService productServiceImpl;
+	private final OrdersDetailService ordersDetailSeviceImpl;
+	private final SessionService sessionService;
 	private final ServletContext app;
-	private final MailerServiceImpl mailerServiceImpl;
+	private final MailerService mailerServiceImpl;
 
 	@ModelAttribute("user")
 	public Users getUsers() {
-		return (Users) sessionSevice.getAttribute(Keyword.acc);
+		return (Users) sessionService.getAttribute(Keyword.acc);
 	}
 
 	@ModelAttribute("listByProducts")
@@ -71,10 +70,9 @@ public class BillController {
 
 	@ModelAttribute("discounts")
 	public double getDiscount() {
-		if (sessionSevice.getAttribute(Keyword.voucher) != null) {
-			Voucher voucher = (Voucher) sessionSevice.getAttribute(Keyword.voucher);
-			double discount = getTotal() * voucher.getDiscount() / 100;
-			return discount;
+		if (sessionService.getAttribute(Keyword.voucher) != null) {
+			Voucher voucher = (Voucher) sessionService.getAttribute(Keyword.voucher);
+			return getTotal() * voucher.getDiscount() / 100;
 
 		}
 		return 0;
@@ -102,8 +100,8 @@ public class BillController {
 			// add Orders
 			Orders ordersBy = orders.get();
 			ordersBy.setCreateday(new Date());
-			if (sessionSevice.getAttribute(Keyword.voucher) != null) {
-				voucher = (Voucher) sessionSevice.getAttribute(Keyword.voucher);
+			if (sessionService.getAttribute(Keyword.voucher) != null) {
+				voucher = (Voucher) sessionService.getAttribute(Keyword.voucher);
 				ordersBy.setVoucher(voucher.getId());
 			}
 			ordersBy.setUsers(getUsers());
@@ -120,7 +118,7 @@ public class BillController {
 
 			// send mail ;
 			Updatemailsender();
-			sessionSevice.removeAttribute(Keyword.voucher);
+			sessionService.removeAttribute(Keyword.voucher);
 
 			return "thanks";
 

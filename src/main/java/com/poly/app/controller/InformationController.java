@@ -2,8 +2,9 @@ package com.poly.app.controller;
 
 import java.util.Optional;
 
+import com.poly.app.service.ShoppingCartService;
+import com.poly.app.service.UsersService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +18,7 @@ import com.poly.app.Impl.ShoppingCartServiceImpl;
 import com.poly.app.Impl.UsersServiceImpl;
 import com.poly.app.dto.ChangePass;
 import com.poly.app.enity.Users;
-import com.poly.app.service.SessionSevice;
+import com.poly.app.service.SessionService;
 import com.poly.app.util.AES;
 import com.poly.app.util.Keyword;
 
@@ -28,9 +29,9 @@ import jakarta.validation.Valid;
 @RequiredArgsConstructor
 public class InformationController {
 
-	private final SessionSevice sessionSevice;
-	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
-	private final UsersServiceImpl usersServiceImpl;
+	private final SessionService sessionService;
+	private final ShoppingCartService shoppingCartServiceImpl;
+	private final UsersService usersServiceImpl;
 
 	@ModelAttribute("numberCartItem")
 	public int getnumberCartItem() {
@@ -44,7 +45,7 @@ public class InformationController {
 	
 	@ModelAttribute("user")
 	private Users getUsers() {
-		return sessionSevice.getAttribute(Keyword.acc);
+		return sessionService.getAttribute(Keyword.acc);
 	}
 	@GetMapping("views")
 	public String infor(Model model) {
@@ -68,7 +69,7 @@ public class InformationController {
 				us.setPassword(AES.encrypt(changePass.getNewPass(), Keyword.keyCode));
 				System.out.println(AES.encrypt(changePass.getNewPass(), Keyword.keyCode));
 				usersServiceImpl.update(us);
-				sessionSevice.removeAttribute(Keyword.acc);
+				sessionService.removeAttribute(Keyword.acc);
 				return "redirect:/index";
 			}
 		}

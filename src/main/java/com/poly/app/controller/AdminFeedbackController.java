@@ -1,32 +1,27 @@
 package com.poly.app.controller;
 
+import com.poly.app.dto.MailModel;
+import com.poly.app.enity.Feedback;
+import com.poly.app.service.FeedbackService;
+import com.poly.app.service.MailerService;
+import com.poly.app.util.SortAnPage;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import com.poly.app.Impl.FeedbackServiceImpl;
-import com.poly.app.Impl.MailerServiceImpl;
-import com.poly.app.dto.MailModel;
-import com.poly.app.enity.Feedback;
-import com.poly.app.util.SortAnPage;
-
 @Controller
 @RequestMapping("admin/feedback")
 @RequiredArgsConstructor
 public class AdminFeedbackController {
-	private final FeedbackServiceImpl feedbackServiceImpl;
-	private final MailerServiceImpl mailerServiceImpl;
+	private final FeedbackService feedbackServiceImpl;
+	private final MailerService mailerServiceImpl;
 	@GetMapping("")
 	private String view(Model model) {
 		model.addAttribute("ListFeedback", feedbackServiceImpl.findAll(SortAnPage.getSort("createday")));

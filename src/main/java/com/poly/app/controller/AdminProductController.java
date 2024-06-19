@@ -4,8 +4,10 @@ import com.poly.app.Impl.CategoriesServiceImpl;
 import com.poly.app.Impl.ProductServiceImpl;
 import com.poly.app.enity.Categories;
 import com.poly.app.enity.Product;
+import com.poly.app.service.CategoriesService;
 import com.poly.app.service.ParamService;
-import com.poly.app.service.SessionSevice;
+import com.poly.app.service.ProductService;
+import com.poly.app.service.SessionService;
 import com.poly.app.util.SortAnPage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,9 +25,9 @@ import java.util.Optional;
 @RequestMapping("admin/product")
 @RequiredArgsConstructor
 public class AdminProductController {
-	private final ProductServiceImpl productServiceImpl;
-	private final CategoriesServiceImpl categoriesServiceImpl;
-	private final SessionSevice sessionSevice;
+	private final ProductService productServiceImpl;
+	private final CategoriesService categoriesServiceImpl;
+	private final SessionService sessionService;
 	private final ParamService paramService;
 
 	@GetMapping("")
@@ -36,8 +38,8 @@ public class AdminProductController {
 
 	@GetMapping("add")
 	public String add(Model model) {
-		sessionSevice.setAttribute("action", "add");
-		sessionSevice.removeAttribute("p");
+		sessionService.setAttribute("action", "add");
+		sessionService.removeAttribute("p");
 		model.addAttribute("p", new Product());
 		return "addproduct";
 	}
@@ -45,8 +47,8 @@ public class AdminProductController {
 	@GetMapping("view/{id}")
 	public String view(@PathVariable("id") Integer id, Model model) {
 		Product product = productServiceImpl.findById(id).get();
-		sessionSevice.setAttribute("action", "update");
-		sessionSevice.setAttribute("p", product);
+		sessionService.setAttribute("action", "update");
+		sessionService.setAttribute("p", product);
 		model.addAttribute("p", product);
 		return "addproduct";
 	}
@@ -106,7 +108,7 @@ public class AdminProductController {
 		String files = "";
 		Product product =null;
 		try {
-			String action =  sessionSevice.getAttribute("action");
+			String action =  sessionService.getAttribute("action");
 			main = paramService.save(fileimg, "/img/products");
 			files = paramService.getStringfiles(thumnail, "/img/detailproduct");
 			try {

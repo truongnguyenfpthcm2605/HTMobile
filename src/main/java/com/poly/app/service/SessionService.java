@@ -1,14 +1,13 @@
 package com.poly.app.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
 
 @Service
 @RequiredArgsConstructor
-public class SessionSevice {
+public class SessionService {
 
 	private final HttpSession session;
 	public void setAttribute(String name,Object value) {

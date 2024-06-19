@@ -4,8 +4,10 @@ package com.poly.app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.poly.app.service.ProductService;
+import com.poly.app.service.ShoppingCartService;
+import com.poly.app.service.VoucherService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,7 @@ import com.poly.app.Impl.VoucherServiceImpl;
 import com.poly.app.dto.CartItem;
 import com.poly.app.enity.Product;
 import com.poly.app.enity.Voucher;
-import com.poly.app.service.SessionSevice;
+import com.poly.app.service.SessionService;
 import com.poly.app.util.Keyword;
 import java.util.Date;
 
@@ -31,10 +33,10 @@ import java.util.Date;
 @RequestMapping("cart")
 @RequiredArgsConstructor
 public class Cartcontroller {
-	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
-	private final ProductServiceImpl productServiceImpl;
-	private final VoucherServiceImpl voucherServiceImpl;
-	private final SessionSevice sessionSevice;
+	private final ShoppingCartService shoppingCartServiceImpl;
+	private final ProductService productServiceImpl;
+	private final VoucherService voucherServiceImpl;
+	private final SessionService sessionService;
 
 	private double discout = 1;
 
@@ -95,10 +97,10 @@ public class Cartcontroller {
 		}
 		if (voucher != null) {
 			discout = voucher.getDiscount();
-			sessionSevice.setAttribute(Keyword.voucher, voucher);
+			sessionService.setAttribute(Keyword.voucher, voucher);
 			model.addAttribute("valueVoucher", voucher.getId());
 		} else {
-			sessionSevice.removeAttribute(Keyword.voucher);
+			sessionService.removeAttribute(Keyword.voucher);
 		}
 		return "redirect:/cart/views";
 	}

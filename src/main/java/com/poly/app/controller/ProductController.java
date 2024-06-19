@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.poly.app.service.ProductService;
+import com.poly.app.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,19 +19,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.app.Impl.ProductServiceImpl;
 import com.poly.app.Impl.ShoppingCartServiceImpl;
 import com.poly.app.enity.Product;
-import com.poly.app.service.SessionSevice;
+import com.poly.app.service.SessionService;
 import com.poly.app.util.Keyword;
 
 @Controller
 @RequestMapping("product")
 @RequiredArgsConstructor
 public class ProductController {
-	public static final Integer PAGE_SĨZE = 9;
-	private final ShoppingCartServiceImpl shoppingCartServiceImpl;
-	private final SessionSevice sessionSevice;
+	public static final Integer PAGE_SIZE = 9;
+	private final ShoppingCartService shoppingCartServiceImpl;
+	private final SessionService sessionService;
 	private final ProductService productService;
 
 	@ModelAttribute("numberCartItem")
@@ -47,9 +46,9 @@ public class ProductController {
 	
 	@GetMapping("page")
 	public String Page(Model model,@RequestParam("p") Optional<Integer> p) {
-		String keyw = sessionSevice.getAttribute(Keyword.search);
+		String keyw = sessionService.getAttribute(Keyword.search);
 		if(keyw!=null) {
-			Pageable pageable = PageRequest.of(p.orElse(0), PAGE_SĨZE);
+			Pageable pageable = PageRequest.of(p.orElse(0), PAGE_SIZE);
 			Page<Product> page = productService.findByKeywords("%"+keyw+"%", pageable);
 			model.addAttribute("pageProduct", page);
 			
@@ -76,8 +75,8 @@ public class ProductController {
 	
 	@PostMapping("search")
 	private String search(Model model,@RequestParam("search") Optional<String> keyword) {
-		Pageable pageable = PageRequest.of(0, PAGE_SĨZE);
-		sessionSevice.setAttribute(Keyword.search, keyword.orElse(""));
+		Pageable pageable = PageRequest.of(0, PAGE_SIZE);
+		sessionService.setAttribute(Keyword.search, keyword.orElse(""));
 		Page<Product> page = productService.findByKeywords("%"+keyword.orElse("")+"%", pageable);
 		model.addAttribute("pageProduct", page);
 		model.addAttribute("keywords", keyword.orElse(""));
@@ -112,14 +111,14 @@ public class ProductController {
 	}
 	
 	public Page<Product> getPage(Integer number){
-		Pageable pageable = PageRequest.of(number, PAGE_SĨZE);
+		Pageable pageable = PageRequest.of(number, PAGE_SIZE);
 		Page<Product> page = productService.findAll(pageable);
 		return page;
 	}
 	
 	
 	public Page<Product> getPage(Integer number,Sort sort){
-		Pageable pageable = PageRequest.of(number, PAGE_SĨZE,sort);
+		Pageable pageable = PageRequest.of(number, PAGE_SIZE,sort);
 		Page<Product> page = productService.findAll(pageable);
 		return page;
 	}

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.poly.app.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin/member")
 @RequiredArgsConstructor
 public class AdminMemberController {
-	private final UsersServiceImpl usersServiceImpl;
+	private final UsersService usersServiceImpl;
 	private final ServletContext app;
 
 	@GetMapping("")

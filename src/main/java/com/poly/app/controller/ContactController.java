@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
+import com.poly.app.service.FeedbackService;
+import com.poly.app.service.MailerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,7 @@ import com.poly.app.Impl.MailerServiceImpl;
 import com.poly.app.dto.MailModel;
 import com.poly.app.enity.Feedback;
 import com.poly.app.enity.Users;
-import com.poly.app.service.SessionSevice;
+import com.poly.app.service.SessionService;
 import com.poly.app.util.Keyword;
 
 @Controller
@@ -25,9 +27,9 @@ import com.poly.app.util.Keyword;
 @RequiredArgsConstructor
 public class ContactController {
 
-	private final FeedbackServiceImpl feedbackServiceImpl;
-	private final MailerServiceImpl mailerServiceImpl;
-	private final SessionSevice sessionSevice;
+	private final FeedbackService feedbackServiceImpl;
+	private final MailerService mailerServiceImpl;
+	private final SessionService sessionService;
 	@GetMapping("views")
 	public String index() {
 		return "contact";
@@ -36,7 +38,7 @@ public class ContactController {
 	@GetMapping("report")
 	@ResponseBody
 	public ResponseEntity<String> report(@RequestParam("content") Optional<String> content) {
-		Users users = sessionSevice.getAttribute(Keyword.acc);
+		Users users = sessionService.getAttribute(Keyword.acc);
 		if(users!=null) {
 			Feedback feedback = new Feedback();
 			feedback.setCreateday(new Date());

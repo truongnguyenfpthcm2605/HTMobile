@@ -1,18 +1,12 @@
 package com.poly.app.util;
 
-import java.io.FileOutputStream;
-import java.util.List;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
+import com.poly.app.enity.Users;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.poly.app.enity.Users;
+import java.io.FileOutputStream;
+import java.util.List;
 
 
 public class ExcelUtil{
